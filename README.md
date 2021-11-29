@@ -1,4 +1,4 @@
-# 🌑 PPBot
+# 🥇 PPBot
 
 ## 🔌 Running the bot
 

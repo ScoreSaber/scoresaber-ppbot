@@ -1,0 +1,44 @@
+{
+   "name": "pp-bot",
+   "version": "1.0.0",
+   "description": "PPBot, he lives in the ScoreSaber Discord",
+   "main": "src/index.ts",
+   "scripts": {
+      "start": "npm run build && node dist/index.js",
+      "build": "node build.js",
+      "dev": "nodemon"
+   },
+   "nodemonConfig": {
+      "watch": [
+         "src"
+      ],
+      "ext": "ts, html",
+      "exec": "ts-node -r tsconfig-paths/register ./src/"
+   },
+   "author": "ScoreSaber",
+   "devDependencies": {
+      "@types/node": "^16.7.1",
+      "@types/uuid": "^8.3.1",
+      "@types/ws": "^7.4.7",
+      "typescript": "^4.3.5"
+   },
+   "dependencies": {
+      "@discordjs/builders": "^0.5.0",
+      "@discordjs/rest": "0.1.0-canary.0",
+      "axios": "^0.24.0",
+      "canvas": "^2.8.0",
+      "discord-api-types": "^0.22.0",
+      "discord-buttons": "^4.0.0",
+      "discord.js": "^12.5.3",
+      "dotenv": "^10.0.0",
+      "ffmpeg": "^0.0.4",
+      "fluent-ffmpeg": "^2.1.2",
+      "fs-extra": "^10.0.0",
+      "knex": "^0.95.10",
+      "nodemon": "^2.0.12",
+      "tsconfig-paths": "^3.10.1",
+      "tslib": "^2.3.1",
+      "uuid": "^8.3.2",
+      "ytdl-core": "^4.9.1"
+   }
+}

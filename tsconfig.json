@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./",
+		"emitDecoratorMetadata": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"module": "commonjs",
+		"outDir": "dist",
+		"removeComments": true,
+		"sourceMap": true,
+		"strict": true,
+		"target": "es6",
+		"moduleResolution": "node",
+		"types": ["node"],
+		"typeRoots": ["node_modules/@types"],
+		"skipLibCheck": true
+	},
+	"ts-node": {
+		"files": true
+	},
+	"include": ["src/**/*.ts" , "src/images/*.png"],
+	"exclude": ["src/public/"],
+	"files": ["types/environment.d.ts"]
+	
+}

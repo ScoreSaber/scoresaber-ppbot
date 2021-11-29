@@ -9,7 +9,7 @@
 
 ### 🔧 In development mode
 
-Run the bot in development mode with: `npm run start:dev` this will restart the bot when files are changed
+Run the bot in development mode with: `npm run dev` this will restart the bot when files are changed
 
 ### 🚀 In production
 

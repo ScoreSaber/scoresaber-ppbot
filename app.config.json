@@ -1,0 +1,10 @@
+{
+   "apps": [
+      {
+         "name": "pp-bot",
+         "script": "node",
+         "interpreter": "none",
+         "args": "dist/index.js"
+      }
+   ]
+}

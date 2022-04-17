@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { TextChannel } from 'discord.js';
 import { CommandContext } from '../../models/command-context';
 import { Command } from '../command';
@@ -6,23 +7,35 @@ export class SendMessage implements Command {
    commandNames = ['sendmessage'];
 
    async run(parsedUserCommand: CommandContext): Promise<void> {
-      if (parsedUserCommand.args.length >= 2) {
+      if (parsedUserCommand.args.length >= 3) {
          if (parsedUserCommand.originalMessage.guild) {
-            const channel = parsedUserCommand.originalMessage.guild.channels.cache.get(parsedUserCommand.args[0]) as TextChannel;
+            const mode = parsedUserCommand.args[0];
+            const channel = parsedUserCommand.originalMessage.guild.channels.cache.get(parsedUserCommand.args[1]) as TextChannel;
             if (channel) {
-               const message = await channel.send(parsedUserCommand.args[1]);
+               let messageContents = parsedUserCommand.args[2];
+
+               if (mode == 'link') {
+                  const messageData = await axios.get(messageContents);
+                  if (messageData.status == 200) {
+                     messageContents = messageData.data;
+                  }
+               }
+
+               const message = await channel.send(messageContents);
                if (message) {
-                  if (parsedUserCommand.args[2]) {
-                     if (parsedUserCommand.args[2] == 'pin') {
+                  if (parsedUserCommand.args[3]) {
+                     if (parsedUserCommand.args[3] == 'pin') {
                         await message.pin();
                      }
-                     if (parsedUserCommand.args[2] == 'publish') {
+                     if (parsedUserCommand.args[3] == 'publish') {
                         await message.crosspost();
                      }
                   }
                }
             }
          }
+      } else {
+         parsedUserCommand.originalMessage.reply('Usage: !sendmessage <mode> <channelId> <messageContents> *<extraFunction>');
       }
    }
 

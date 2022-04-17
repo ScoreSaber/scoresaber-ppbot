@@ -18,6 +18,9 @@ export class SendMessage implements Command {
                   const messageData = await axios.get(messageContents);
                   if (messageData.status == 200) {
                      messageContents = messageData.data;
+                  } else {
+                     parsedUserCommand.originalMessage.reply('Failed to get message data');
+                     return;
                   }
                }
 

@@ -2,7 +2,7 @@ import { TextChannel } from 'discord.js';
 import { CommandContext } from '../../models/command-context';
 import { Command } from '../command';
 
-export class CommandList implements Command {
+export class SendMessage implements Command {
    commandNames = ['sendmessage'];
 
    async run(parsedUserCommand: CommandContext): Promise<void> {

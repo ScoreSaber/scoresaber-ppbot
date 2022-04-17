@@ -6,12 +6,14 @@ import { LinkAccount } from './commands/account-management/link';
 import { RollDice } from './commands/games/diceroll';
 import { CommandList } from './commands/command-list';
 
+import { SendMessage } from './commands/admin/send-message';
+
 export class CommandHandler {
    private commands: Command[];
    private readonly prefix: string;
 
    constructor(prefix: string) {
-      const commandClasses = [CommandList, LinkAccount, RollDice];
+      const commandClasses = [CommandList, LinkAccount, RollDice, SendMessage];
       this.commands = commandClasses.map((CommandClass) => new CommandClass());
       this.prefix = prefix;
    }

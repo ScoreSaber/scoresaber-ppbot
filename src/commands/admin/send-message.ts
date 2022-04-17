@@ -6,7 +6,7 @@ export class SendMessage implements Command {
    commandNames = ['sendmessage'];
 
    async run(parsedUserCommand: CommandContext): Promise<void> {
-      if (parsedUserCommand.args.length == 2) {
+      if (parsedUserCommand.args.length >= 2) {
          if (parsedUserCommand.originalMessage.guild) {
             const channel = parsedUserCommand.originalMessage.guild.channels.cache.get(parsedUserCommand.args[0]) as TextChannel;
             if (channel) {

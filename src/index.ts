@@ -11,8 +11,7 @@ disbut(client);
 
 client.on('ready', () => {
    if (client.user) {
-      console.log(`Logged in as ${client.user.tag} pog`);
-      client.user.setActivity({ type: 'COMPETING', name: 'beating you up' });
+      console.log(`Logged in as ${client.user.tag}`);
    }
 });
 
@@ -25,7 +24,7 @@ client.on('error', (e) => {
 });
 
 client.on('clickButton', async (button: MessageComponent) => {
-   // We can do fancy button handlers in here 😳
+   // We can do fancy button handlers in here
 });
 
 console.log('Logging in');

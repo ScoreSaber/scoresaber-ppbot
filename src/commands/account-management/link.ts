@@ -33,14 +33,14 @@ export class LinkAccount implements Command {
                if (result.status == 200) {
                   await parsedUserCommand.originalMessage.reply('You have sucessfully linked / refreshed your patreon account!');
                } else {
-                  await parsedUserCommand.originalMessage.reply('An error has occured refresion your patreon account');
+                  await parsedUserCommand.originalMessage.reply('An error has occured refreshing your patreon account');
                }
             } catch (ex) {
                if (axios.isAxiosError(ex)) {
                   const scoreSaberError = ex.response!.data as ScoreSaberError;
                   await parsedUserCommand.originalMessage.reply(scoreSaberError.errorMessage);
                } else {
-                  await parsedUserCommand.originalMessage.reply('An error has occured refresion your patreon account');
+                  await parsedUserCommand.originalMessage.reply('An error has occured refreshing your patreon account');
                }
             }
          }

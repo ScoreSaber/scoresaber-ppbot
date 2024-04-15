@@ -1,13 +1,11 @@
-import Discord, { Message } from 'discord.js';
-import disbut, { MessageComponent } from 'discord-buttons';
+import Discord, { Message, GatewayIntentBits } from 'discord.js';
 import { CommandHandler } from './command-handler';
 import dotenv from 'dotenv';
 
-const client = new Discord.Client();
+const client = new Discord.Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 const commandHandler = new CommandHandler('!');
 
 dotenv.config();
-disbut(client);
 
 client.on('ready', () => {
    if (client.user) {
@@ -21,10 +19,6 @@ client.on('message', async (message: Message) => {
 
 client.on('error', (e) => {
    console.error('Discord client error!', e);
-});
-
-client.on('clickButton', async (button: MessageComponent) => {
-   // We can do fancy button handlers in here
 });
 
 console.log('Logging in');

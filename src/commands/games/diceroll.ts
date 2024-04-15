@@ -9,7 +9,7 @@ export class RollDice implements Command {
       const max = 6;
       const result = min - 1 + Math.ceil(Math.random() * (max - min + 1));
 
-      parsedUserCommand.originalMessage.channel.send(result);
+      parsedUserCommand.originalMessage.channel.send(result.toString());
    }
 
    hasPermissionToRun(parsedUserCommand: CommandContext): boolean {

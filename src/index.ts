@@ -2,7 +2,7 @@ import Discord, { Message, GatewayIntentBits } from 'discord.js';
 import { CommandHandler } from './command-handler';
 import dotenv from 'dotenv';
 
-const client = new Discord.Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
+const client = new Discord.Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 const commandHandler = new CommandHandler('!');
 
 dotenv.config();
@@ -13,7 +13,7 @@ client.on('ready', () => {
    }
 });
 
-client.on('message', async (message: Message) => {
+client.on('messageCreate', async (message: Message) => {
    commandHandler.handleMessage(message);
 });
 

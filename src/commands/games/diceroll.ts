@@ -14,7 +14,7 @@ export class RollDice implements Command {
 
    hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
       if (parsedUserCommand.originalMessage.member) {
-         if (parsedUserCommand.originalMessage.member.roles.cache.has(process.env.SUPPORTER_ROLE)) {
+         if (parsedUserCommand.originalMessage.member.roles.cache.has(process.env.SUPPORTER_ROLE) || parsedUserCommand.originalMessage.member.roles.cache.hasAny(...process.env.ALL_STAFF_ROLES.split(','))) {
             return true;
          }
       }

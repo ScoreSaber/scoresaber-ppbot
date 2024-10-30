@@ -1,3 +1,4 @@
+import { TextChannel } from 'discord.js';
 import { CommandContext } from '../models/command-context';
 import { Command } from './command';
 
@@ -9,7 +10,10 @@ export class CommandList implements Command {
       const commands = `[Supporter & PP Farmer] !link <profile>
 [Supporter & PP Farmer] !roll
 `;
-      parsedUserCommand.originalMessage.channel.send(commands);
+      const channel = parsedUserCommand.originalMessage.channel;
+      if (channel.isTextBased()) {
+         (channel as TextChannel).send(commands);
+      }
    }
 
    hasPermissionToRun(parsedUserCommand: CommandContext): boolean {

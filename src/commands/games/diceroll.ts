@@ -1,3 +1,4 @@
+import { TextChannel } from 'discord.js';
 import { CommandContext } from '../../models/command-context';
 import { Command } from '../command';
 
@@ -8,13 +9,18 @@ export class RollDice implements Command {
       const min = 1;
       const max = 6;
       const result = min - 1 + Math.ceil(Math.random() * (max - min + 1));
-
-      parsedUserCommand.originalMessage.channel.send(result.toString());
+      const channel = parsedUserCommand.originalMessage.channel;
+      if (channel.isTextBased()) {
+         (channel as TextChannel).send(result.toString());
+      }
    }
 
    hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
       if (parsedUserCommand.originalMessage.member) {
-         if (parsedUserCommand.originalMessage.member.roles.cache.has(process.env.SUPPORTER_ROLE) || parsedUserCommand.originalMessage.member.roles.cache.hasAny(...process.env.ALL_STAFF_ROLES.split(','))) {
+         if (
+            parsedUserCommand.originalMessage.member.roles.cache.has(process.env.SUPPORTER_ROLE) ||
+            parsedUserCommand.originalMessage.member.roles.cache.hasAny(...process.env.ALL_STAFF_ROLES.split(','))
+         ) {
             return true;
          }
       }

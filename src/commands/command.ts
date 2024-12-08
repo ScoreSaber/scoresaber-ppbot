@@ -1,7 +1,6 @@
-import { CommandContext } from '../models/command-context';
+import { ApplicationCommandDataResolvable, CommandInteraction } from 'discord.js';
 
 export interface Command {
-   readonly commandNames: string[];
-   run(parsedUserCommand: CommandContext): Promise<void>;
-   hasPermissionToRun(parsedUserCommand: CommandContext): boolean;
+   slashCommandData: ApplicationCommandDataResolvable;
+   execute(interaction: CommandInteraction): Promise<void>;
 }

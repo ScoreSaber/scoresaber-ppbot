@@ -1,29 +1,19 @@
-import { TextChannel } from 'discord.js';
-import { CommandContext } from '../../models/command-context';
+import { CommandInteraction, SlashCommandBuilder } from 'discord.js';
 import { Command } from '../command';
 
 export class RollDice implements Command {
-   commandNames = ['rolldice', 'diceroll', 'roll'];
+   description = 'Roll a six sided die';
 
-   async run(parsedUserCommand: CommandContext): Promise<void> {
+   slashCommandData = new SlashCommandBuilder().setName('roll').setDescription('Roll a six sided die').setDefaultMemberPermissions('0').toJSON();
+
+   async execute(interaction: CommandInteraction): Promise<void> {
       const min = 1;
       const max = 6;
       const result = min - 1 + Math.ceil(Math.random() * (max - min + 1));
-      const channel = parsedUserCommand.originalMessage.channel;
-      if (channel.isTextBased()) {
-         (channel as TextChannel).send(result.toString());
-      }
-   }
 
-   hasPermissionToRun(parsedUserCommand: CommandContext): boolean {
-      if (parsedUserCommand.originalMessage.member) {
-         if (
-            parsedUserCommand.originalMessage.member.roles.cache.has(process.env.SUPPORTER_ROLE) ||
-            parsedUserCommand.originalMessage.member.roles.cache.hasAny(...process.env.ALL_STAFF_ROLES.split(','))
-         ) {
-            return true;
-         }
-      }
-      return false;
+      await interaction.reply({
+         content: `🎲 ${interaction.user} rolled a ${result}!`,
+         ephemeral: false,
+      });
    }
 }

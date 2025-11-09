@@ -3,8 +3,13 @@ import { LinkAccount } from './commands/account-management/link';
 import { RollDice } from './commands/games/diceroll';
 import { SendMessage } from './commands/admin/send-message';
 import dotenv from 'dotenv';
+import { existsSync } from 'fs';
+import { resolve } from 'path';
 
-dotenv.config();
+// Load .env file if it exists, otherwise use process.env directly
+if (existsSync(resolve(process.cwd(), '.env'))) {
+   dotenv.config();
+}
 
 const client = new Discord.Client({
    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
